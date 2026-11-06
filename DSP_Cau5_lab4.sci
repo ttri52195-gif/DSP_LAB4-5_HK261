@@ -1,0 +1,20 @@
+clc;clear;close;
+a1=-0.9;ym1=0;
+N=60;n=0:N;
+yss=ones(1,N+1)*1/(1+a1);
+ytr=(-a1).^(n+1).*(ym1-1/(1+a1));
+y=ytr+yss;
+y2=zeros(1,N+1);yp=ym1;
+for k=1:N+1
+y2(k)=-a1*yp+1;yp=y2(k);
+end
+disp(max(abs(y-y2)));
+subplot(311)
+plot2d3(n,ytr,style=2,rect=[-1,-11,N+1,11]);xgrid();
+xtitle("ytr(n)","n");
+subplot(312)
+plot2d3(n,yss,style=2,rect=[-1,-11,N+1,11]);xgrid();
+xtitle("yss(n)","n");
+subplot(313)
+plot2d3(n,y,style=2,rect=[-1,-11,N+1,11]);xgrid();
+xtitle("y(n)=ytr(n)+yss(n)","n");
